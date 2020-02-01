@@ -27,3 +27,6 @@ target/
 
 # IML files
 *.iml
+
+# Idea files
+.idea/
