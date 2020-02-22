@@ -20,7 +20,7 @@ public class HomeApplianceManagerTest {
         testTV1 = new TV(120, 70.00, 117.5, "Living Room", "Plasma", true, Quality.UHD, 42);
         testTV2 = new TV(80, 27.50, 84.2, "Kitchen", "Small TV", true, Quality.HD, 42);
         testKettle = new Kettle(0, 45.00, 40.0, "Kitchen", "Kettle", false, 20.0, 2.5);
-        testWashingMachine = new WashingMachine(200, 115.00, 40.0, "Bathroom", "Washer", true, 60.0, 30);
+        testWashingMachine = new WashingMachine(200, 115.00, 38.0, "Bathroom", "Washer", true, 60.0, 30);
         homeApplianceManager = new HomeApplianceManager();
         homeApplianceManager.addHomeAppliance(testTV1);
         homeApplianceManager.addHomeAppliance(testTV2);
@@ -57,7 +57,7 @@ public class HomeApplianceManagerTest {
 
     @Test
     public void testFindMostCostlyApplianceByPowerUsage() {
-        assertEquals(new WashingMachine(200, 115.00, 40.0, "Bathroom", "Washer", true, 60.0, 30), homeApplianceManager.getHomeApplianceAtIndex(3));
+        assertEquals(new WashingMachine(200, 115.00, 38.0, "Bathroom", "Washer", true, 60.0, 30), homeApplianceManager.getHomeApplianceAtIndex(3));
         for(int currentIndex=0; currentIndex<homeApplianceManager.getAllHomeAppliance().size(); currentIndex++){
             assertTrue(homeApplianceManager.findMostCostlyApplianceByPowerUsage().getPowerConsumption() >= homeApplianceManager.getAllHomeAppliance().get(currentIndex).getPowerConsumption());
         }
@@ -65,13 +65,14 @@ public class HomeApplianceManagerTest {
 
     @Test
     public void testSummarizeTotalMoneySpent() {
-        final double expectedTotalMoneySpend = (120*117.5 + 80*84.2 + 0*40.0 + 200*40.0) * 0.01319;
-        assertEquals(expectedTotalMoneySpend, homeApplianceManager.summarizeTotalMoneySpent());
+        final double DELTA = 0.000000003;
+        final double expectedTotalMoneySpend = (120*117.5 + 80*84.2 + 0*40.0 + 200*38.0) * 0.01319;
+        assertEquals(expectedTotalMoneySpend, homeApplianceManager.summarizeTotalMoneySpent(), DELTA);
     }
 
     @Test
     public void testSummarizeTotalPowerUsage() {
-        final double expectedTotalPowerUsage = 120*117.5 + 80*84.2 + 0*40.0 + 200*40.0;
+        final double expectedTotalPowerUsage = 120*117.5 + 80*84.2 + 0*40.0 + 200*38.0;
         assertEquals(expectedTotalPowerUsage, homeApplianceManager.summarizeTotalPowerUsage());
     }
 
