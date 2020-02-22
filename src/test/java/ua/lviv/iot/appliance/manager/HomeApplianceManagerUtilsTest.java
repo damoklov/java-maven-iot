@@ -47,4 +47,18 @@ class HomeApplianceManagerUtilsTest extends HomeApplianceManagerTest {
         assertEquals(testTV2, homeApplianceManager.getHomeApplianceAtIndex(2));
         assertEquals(testTV1, homeApplianceManager.getHomeApplianceAtIndex(3));
     }
+
+    @Test
+    void sortHomeApplianceByRepairPrice() {
+        HomeApplianceManagerUtils.sortHomeApplianceByRepairPrice(homeApplianceManager.getAllHomeAppliance(), SortType.ASCENDING);
+        assertEquals(testTV2, homeApplianceManager.getHomeApplianceAtIndex(0));
+        assertEquals(testKettle, homeApplianceManager.getHomeApplianceAtIndex(1));
+        assertEquals(testTV1, homeApplianceManager.getHomeApplianceAtIndex(2));
+        assertEquals(testWashingMachine, homeApplianceManager.getHomeApplianceAtIndex(3));
+        HomeApplianceManagerUtils.sortHomeApplianceByRepairPrice(homeApplianceManager.getAllHomeAppliance(), SortType.DESCENDING);
+        assertEquals(testWashingMachine, homeApplianceManager.getHomeApplianceAtIndex(0));
+        assertEquals(testTV1, homeApplianceManager.getHomeApplianceAtIndex(1));
+        assertEquals(testKettle, homeApplianceManager.getHomeApplianceAtIndex(2));
+        assertEquals(testTV2, homeApplianceManager.getHomeApplianceAtIndex(3));
+    }
 }

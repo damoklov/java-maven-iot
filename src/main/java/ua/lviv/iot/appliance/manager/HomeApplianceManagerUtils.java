@@ -24,8 +24,8 @@ public class HomeApplianceManagerUtils {
     }
 
     public static void sortHomeApplianceByTimeUsage(ArrayList<HomeAppliance> homeApplianceList, SortType sortType) {
-
-        // anonymous inner class
+        /* Anonymous Inner Class */
+      
         Comparator<HomeAppliance> comparator = new Comparator<HomeAppliance>() {
 
             @Override
@@ -47,6 +47,5 @@ public class HomeApplianceManagerUtils {
 
     public static void sortHomeApplianceByRepairPrice(ArrayList<HomeAppliance> homeApplianceList, SortType sortType) {
         homeApplianceList.sort(sortType == SortType.ASCENDING ? (o1, o2) -> (int) (o1.getRepairPrice() - o2.getRepairPrice()) : (o1, o2) -> (int) (o2.getRepairPrice() - o1.getRepairPrice()));
-        //homeAppliances.sort((o1, o2) -> (int) (o1.getRepairPrice() - o2.getRepairPrice()));
     }
 }
