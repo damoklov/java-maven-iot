@@ -25,7 +25,7 @@ public class HomeApplianceManagerUtils {
 
     public static void sortHomeApplianceByTimeUsage(ArrayList<HomeAppliance> homeApplianceList, SortType sortType) {
         /* Anonymous Inner Class */
-
+      
         Comparator<HomeAppliance> comparator = new Comparator<HomeAppliance>() {
 
             @Override
