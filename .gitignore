@@ -30,3 +30,7 @@ target/
 
 # Idea files
 .idea/
+
+# CSV file with objects
+appliance.csv
+
