@@ -70,5 +70,13 @@ public class WashingMachine extends HomeAppliance {
   public int hashCode() {
     return Objects.hash(super.hashCode(), washingTime, itemCapacity);
   }
+
+  public String getHeaders() {
+    return super.getHeaders() + ", washingTime, itemCapacity";
+  }
+
+  public String toCSV() {
+    return super.toCSV() + ", " + this.washingTime + ", " + this.itemCapacity;
+  }
 }
 

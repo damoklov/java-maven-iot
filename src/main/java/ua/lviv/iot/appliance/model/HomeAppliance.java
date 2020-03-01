@@ -135,4 +135,21 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
   public int compareTo(HomeAppliance object) {
     return Integer.compare(this.getPowerConsumption(), object.getPowerConsumption());
   }
+
+  public String getHeaders() {
+    return "powerConsumption, hoursPerMonthUsage, repairPrice, locationInHouse, applianceName, pluggedIntoSocket";
+  }
+
+  /**
+   * Converts fields of class into CSV-writable format.
+   * @result CSV-like format, ready for writing.
+   */
+  public String toCSV() {
+    return powerConsumption + ", "
+            + hoursPerMonthUsage + ", "
+            + repairPrice + ", "
+            + locationInHouse + ", "
+            + applianceName + ", "
+            + pluggedIntoSocket;
+  }
 }

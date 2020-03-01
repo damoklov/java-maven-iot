@@ -19,8 +19,8 @@ public class HomeApplianceManagerUtils {
 
       @Override
       public int compare(HomeAppliance firstAppliance, HomeAppliance secondAppliance) {
-        return (Double.compare(firstAppliance.getHoursPerMonthUsage(),
-                secondAppliance.getHoursPerMonthUsage()));
+        return Double.compare(firstAppliance.getHoursPerMonthUsage(),
+                secondAppliance.getHoursPerMonthUsage());
       }
     };
     homeApplianceList.sort(sortType == SortType.ASCENDING ? comparator : comparator.reversed());

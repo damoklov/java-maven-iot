@@ -70,4 +70,12 @@ public class Kettle extends HomeAppliance {
   public int hashCode() {
     return Objects.hash(super.hashCode(), timeToBoil, waterCapacity);
   }
+
+  public String getHeaders() {
+    return super.getHeaders() + ", timeToBoil, waterCapacity";
+  }
+
+  public String toCSV() {
+    return super.toCSV() + ", " + this.timeToBoil + ", " + this.waterCapacity;
+  }
 }

@@ -70,4 +70,13 @@ public class TV extends HomeAppliance {
   public int hashCode() {
     return Objects.hash(super.hashCode(), quality, numChannelsAvailable);
   }
+
+  public String getHeaders() {
+    return super.getHeaders() + ", quality, numChannelsAvailable";
+  }
+
+  public String toCSV() {
+    return super.toCSV() + ", " + this.quality + ", " + this.numChannelsAvailable;
+  }
+
 }
