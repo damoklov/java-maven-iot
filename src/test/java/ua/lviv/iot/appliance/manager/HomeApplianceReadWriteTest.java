@@ -1,15 +1,16 @@
 package ua.lviv.iot.appliance.manager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import ua.lviv.iot.appliance.model.HomeAppliance;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import ua.lviv.iot.appliance.model.HomeAppliance;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HomeApplianceReadWriteTest extends HomeApplianceManagerTest {
   private static final String OUTPUT_PATH = "appliance.csv";
@@ -49,5 +50,11 @@ public class HomeApplianceReadWriteTest extends HomeApplianceManagerTest {
     }
 
     assertEquals(expectedString.toString(), this.writer.toString());
+  }
+
+  @Test
+  void testHomeApplianceReader() {
+      List<String> lines = HomeApplianceReader.readLinesFromFile(OUTPUT_PATH);
+      System.out.println(lines);
   }
 }
