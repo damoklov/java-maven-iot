@@ -17,6 +17,7 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
   private String locationInHouse;
   private String applianceName;
   private boolean pluggedIntoSocket;
+  private Integer id;
 
   /**
    * Creates object of appliance.
@@ -151,5 +152,13 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
             + locationInHouse + ", "
             + applianceName + ", "
             + pluggedIntoSocket;
+  }
+
+  public void setId(int incrementAndGet) {
+    this.id = incrementAndGet;
+  }
+
+  public Integer getId(){
+    return id;
   }
 }
