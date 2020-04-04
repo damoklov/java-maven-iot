@@ -158,7 +158,7 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
     this.id = incrementAndGet;
   }
 
-  public Integer getId(){
+  public Integer getId() {
     return id;
   }
 }
