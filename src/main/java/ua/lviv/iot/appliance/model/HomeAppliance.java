@@ -48,6 +48,15 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
             DEFAULT_LOCATION, DEFAULT_NAME, DEFAULT_SOCKET_STATE);
   }
 
+  public HomeAppliance(HomeAppliance homeAppliance) {
+    this(homeAppliance.getPowerConsumption(),
+            homeAppliance.getRepairPrice(),
+            homeAppliance.getHoursPerMonthUsage(),
+            homeAppliance.getLocationInHouse(),
+            homeAppliance.getApplianceName(),
+            homeAppliance.getPluggedIntoSocket());
+  }
+
   public final double computeFinalMoneySpentPerMonthInUSD() {
     return HomeAppliance.pricePerWatt * this.powerConsumption * this.hoursPerMonthUsage;
   }
