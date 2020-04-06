@@ -31,9 +31,10 @@ public class HomeApplianceService {
 
   public ResponseEntity<HomeAppliance> updateHomeAppliance(HomeAppliance appliance, Integer applianceId) {
     if (homeApplianceRepository.existsById(applianceId)) {
+      HomeAppliance oldAppliance = new HomeAppliance(homeApplianceRepository.findById(applianceId).get());
       appliance.setId(applianceId);
-      HomeAppliance updatedSweater = homeApplianceRepository.save(appliance);
-      return new ResponseEntity<>(updatedSweater, HttpStatus.OK);
+      homeApplianceRepository.save(appliance);
+      return new ResponseEntity<>(oldAppliance, HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
