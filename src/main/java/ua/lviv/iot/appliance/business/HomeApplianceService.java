@@ -22,8 +22,8 @@ public class HomeApplianceService {
 
   public ResponseEntity<HomeAppliance> getHomeAppliance(Integer applianceId) {
     if (homeApplianceRepository.existsById(applianceId)) {
-      HomeAppliance selectedSweater = homeApplianceRepository.findById(applianceId).get();
-      return new ResponseEntity<>(selectedSweater,HttpStatus.OK);
+      HomeAppliance appliance = homeApplianceRepository.findById(applianceId).get();
+      return new ResponseEntity<>(appliance,HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
