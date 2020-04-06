@@ -2,6 +2,13 @@ package ua.lviv.iot.appliance.model;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class HomeAppliance implements Comparable<HomeAppliance> {
   static final int DEFAULT_POWER_CONSUMPTION = 0;
   static final double DEFAULT_USAGE = 0.0;
@@ -17,6 +24,9 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
   private String locationInHouse;
   private String applianceName;
   private boolean pluggedIntoSocket;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
   /**
@@ -36,6 +46,15 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
   public HomeAppliance() {
     this(DEFAULT_POWER_CONSUMPTION, DEFAULT_USAGE, DEFAULT_REPAIR_PRICE,
             DEFAULT_LOCATION, DEFAULT_NAME, DEFAULT_SOCKET_STATE);
+  }
+
+  public HomeAppliance(HomeAppliance homeAppliance) {
+    this(homeAppliance.getPowerConsumption(),
+            homeAppliance.getRepairPrice(),
+            homeAppliance.getHoursPerMonthUsage(),
+            homeAppliance.getLocationInHouse(),
+            homeAppliance.getApplianceName(),
+            homeAppliance.getPluggedIntoSocket());
   }
 
   public final double computeFinalMoneySpentPerMonthInUSD() {
@@ -158,7 +177,7 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
     this.id = incrementAndGet;
   }
 
-  public Integer getId(){
+  public Integer getId() {
     return id;
   }
 }
