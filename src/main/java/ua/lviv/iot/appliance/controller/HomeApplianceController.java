@@ -47,7 +47,7 @@ public class HomeApplianceController {
   }
 
   public HomeApplianceService getHomeApplianceService() {
-    return this.homeApplianceService;
+    return homeApplianceService;
   }
 
   public void setHomeApplianceService(HomeApplianceService homeApplianceService) {

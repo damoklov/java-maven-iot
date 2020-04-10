@@ -1,14 +1,13 @@
 package ua.lviv.iot.appliance.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Set;
+import javax.persistence.*;
 
 
 @Entity
+@Table(name = "home_appliance")
 public class HomeAppliance implements Comparable<HomeAppliance> {
   static final int DEFAULT_POWER_CONSUMPTION = 0;
   static final double DEFAULT_USAGE = 0.0;
@@ -28,6 +27,15 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+
+  @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+  @JoinColumn(name = "manufacturer_id")
+  @JsonIgnoreProperties("appliances")
+  private Manufacturer manufacturer;
+
+  @ManyToMany(mappedBy = "appliances", cascade = {CascadeType.ALL})
+  @JsonIgnoreProperties("appliances")
+  private Set<Owner> owners;
 
   /**
    * Creates object of appliance.
@@ -179,5 +187,21 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
 
   public Integer getId() {
     return id;
+  }
+
+  public Manufacturer getManufacturer() {
+    return manufacturer;
+  }
+
+  public void setManufacturer(Manufacturer manufacturer) {
+    this.manufacturer = manufacturer;
+  }
+
+  public Set<Owner> getOwners() {
+    return owners;
+  }
+
+  public void setOwners(Set<Owner> owners) {
+    this.owners = owners;
   }
 }
