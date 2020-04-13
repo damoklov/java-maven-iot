@@ -12,32 +12,51 @@ import ua.lviv.iot.appliance.model.Owner;
 @RequestMapping("/owners")
 @RestController
 public class OwnerController {
+
   @Autowired
   private OwnerService ownerService;
 
   @GetMapping
   public List<Owner> getAllOwners() {
-    return this.ownerService.findAll();
+    return ownerService.findAll();
   }
 
   @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-  public Owner createOwner(@RequestBody Owner owner) {
-    ownerService.createOwner(owner);
-    return owner;
+  public ResponseEntity<Owner> createOwner(@RequestBody Owner owner) {
+    Owner newOwner = ownerService.create(owner);
+    if (newOwner != null) {
+      return new ResponseEntity<>(newOwner, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
+
   @GetMapping(path = "/{id}")
   public ResponseEntity<Owner> getOwner(@PathVariable("id") Integer ownerId) {
-    return ownerService.getOwner(ownerId);
+    Owner owner = ownerService.findById(ownerId);
+    if (owner != null) {
+      return new ResponseEntity<>(owner, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @PutMapping(path = "/{id}")
-  public ResponseEntity<Owner>  updateOwner(@PathVariable("id") Integer ownerId, @RequestBody Owner owner) {
-    return ownerService.updateOwner(owner, ownerId);
+  public ResponseEntity<Owner> updateOwner(@PathVariable("id") Integer ownerId, @RequestBody Owner owner) {
+    Owner oldOwner = ownerService.updateOwner(owner, ownerId);
+    if (oldOwner != null) {
+      return new ResponseEntity<>(oldOwner, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @DeleteMapping(path = "/{id}")
   public ResponseEntity<Owner> deleteOwner(@PathVariable("id") Integer ownerId) {
-    HttpStatus status = ownerService.deleteOwner(ownerId);
-    return ResponseEntity.status(status).build();
+    if (ownerService.delete(ownerId) != null) {
+      return new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 }

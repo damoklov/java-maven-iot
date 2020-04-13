@@ -23,31 +23,40 @@ public class ManufacturerController {
 
   @GetMapping(path = "/{id}")
   public ResponseEntity<Manufacturer> getManufacturer(@PathVariable("id") Integer manufacturerId) {
-    return manufacturerService.getManufacturer(manufacturerId);
+    Manufacturer manufacturer = manufacturerService.findById(manufacturerId);
+    if (manufacturer != null) {
+      return new ResponseEntity<>(manufacturer, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-  public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer) {
-    manufacturerService.createManufacturer(manufacturer);
-    return manufacturer;
+  public ResponseEntity<Manufacturer> createManufacturer(@RequestBody Manufacturer manufacturer) {
+    Manufacturer newManufacturer = manufacturerService.create(manufacturer);
+    if (newManufacturer != null) {
+      return new ResponseEntity<>(newManufacturer, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @PutMapping(path = "/{id}")
-  public ResponseEntity<Manufacturer>  updateManufacturer(@PathVariable("id") Integer manufacturerId, @RequestBody Manufacturer manufacturer) {
-    return manufacturerService.updateManufacturer(manufacturer, manufacturerId);
+  public ResponseEntity<Manufacturer> updateManufacturer(@PathVariable("id") Integer manufacturerId, @RequestBody Manufacturer manufacturer) {
+    Manufacturer oldManufacturer = manufacturerService.updateManufacturer(manufacturer, manufacturerId);
+    if (oldManufacturer != null) {
+      return new ResponseEntity<>(oldManufacturer, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @DeleteMapping(path = "/{id}")
   public ResponseEntity<Manufacturer> deleteManufacturer(@PathVariable("id") Integer manufacturerId) {
-    HttpStatus status = manufacturerService.deleteManufacturer(manufacturerId);
-    return ResponseEntity.status(status).build();
-  }
-
-  public ManufacturerService getManufacturerService() {
-    return manufacturerService;
-  }
-
-  public void setManufacturerService(ManufacturerService manufacturerService) {
-    this.manufacturerService = manufacturerService;
+    if (manufacturerService.delete(manufacturerId) != null) {
+      return new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 }
