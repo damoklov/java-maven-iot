@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "home_appliance")
 public class HomeAppliance implements Comparable<HomeAppliance> {
@@ -28,12 +27,15 @@ public class HomeAppliance implements Comparable<HomeAppliance> {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "manufacturer_id")
   @JsonIgnoreProperties("appliances")
   private Manufacturer manufacturer;
 
-  @ManyToMany(mappedBy = "appliances", cascade = {CascadeType.ALL})
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "Appliance_Owner",
+          joinColumns = { @JoinColumn(name = "appliance_id", nullable = false)},
+          inverseJoinColumns = { @JoinColumn(name = "owner_id", nullable = true)})
   @JsonIgnoreProperties("appliances")
   private Set<Owner> owners;
 

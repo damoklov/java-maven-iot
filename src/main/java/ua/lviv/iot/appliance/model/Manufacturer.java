@@ -15,7 +15,7 @@ public class Manufacturer {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @OneToMany(mappedBy = "manufacturer", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+  @OneToMany(mappedBy = "manufacturer", fetch = FetchType.EAGER)
   @JsonIgnoreProperties("manufacturer")
   private Set<HomeAppliance> appliances;
 

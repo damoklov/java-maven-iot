@@ -14,7 +14,7 @@ public class Owner {
 
   private String fullName;
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "Appliance_Owner",
             joinColumns = { @JoinColumn(name = "owner_id", nullable = false)},
             inverseJoinColumns = { @JoinColumn(name = "appliance_id", nullable = false)})
