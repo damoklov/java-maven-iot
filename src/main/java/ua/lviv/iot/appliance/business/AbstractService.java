@@ -15,7 +15,11 @@ public abstract class AbstractService<T> {
   }
 
   public T findById(Integer id) {
-    return getRepository().findById(id).get();
+    if (getRepository().findById(id).isPresent()) {
+      return getRepository().findById(id).get();
+    } else {
+      return null;
+    }
   }
 
   public List<T> getAll() {
@@ -23,9 +27,13 @@ public abstract class AbstractService<T> {
   }
 
   public T delete(Integer id) {
-    T possibleObject = getRepository().findById(id).get();
-    getRepository().deleteById(id);
-    return possibleObject;
+    if (getRepository().findById(id).isPresent()) {
+      T possibleObject = getRepository().findById(id).get();
+      getRepository().deleteById(id);
+      return possibleObject;
+    } else {
+      return null;
+    }
   }
 
   public List<T> findAll() {
